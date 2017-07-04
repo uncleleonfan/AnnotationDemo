@@ -1,7 +1,5 @@
 package com.example;
 
-import com.example.annotations.InjectInt;
-import com.example.annotations.InjectString;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -43,23 +41,9 @@ public class InjectProcessor extends AbstractProcessor{
                 messager.printMessage(Diagnostic.Kind.NOTE, "element_package:" + processingEnv.getElementUtils().getPackageOf(element).getQualifiedName());
                 messager.printMessage(Diagnostic.Kind.NOTE, "element_type:" + element.asType().toString());
                 messager.printMessage(Diagnostic.Kind.NOTE, "element_kind:" + element.getKind().name());
+                addElementToGenerateJavaFile(element, messager);
             }
         }
-
-        Set<? extends Element> stringElements = roundEnvironment.getElementsAnnotatedWith(InjectString.class);
-        for (Element element : stringElements) {
-            int value = element.getAnnotation(InjectString.class).value();
-            messager.printMessage(Diagnostic.Kind.NOTE, "element_string_id:" + value);
-            addElementToGenerateJavaFile(element, messager);
-        }
-
-        Set<? extends Element> intElements = roundEnvironment.getElementsAnnotatedWith(InjectInt.class);
-        for (Element element : intElements) {
-            int value = element.getAnnotation(InjectInt.class).value();
-            messager.printMessage(Diagnostic.Kind.NOTE, "element_int_id:" + value );
-            addElementToGenerateJavaFile(element, messager);
-        }
-
         generateJavaFile();
         return true;
     }

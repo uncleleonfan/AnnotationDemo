@@ -12,16 +12,16 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    @InjectString(R.string.hello)
+    @InjectString
     public String hello;
 
-    @InjectString(R.string.world)
+    @InjectString
     public String world;
 
-    @InjectInt(R.integer.one)
+    @InjectInt
     public int one;
 
-    @InjectInt(R.integer.two)
+    @InjectInt
     public int two;
 
     @Override
