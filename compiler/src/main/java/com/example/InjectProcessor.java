@@ -1,5 +1,6 @@
 package com.example;
 
+import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -22,8 +24,10 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
+
 @SupportedAnnotationTypes({"com.example.annotations.InjectString", "com.example.annotations.InjectInt"})
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
+@AutoService(Processor.class)
 public class InjectProcessor extends AbstractProcessor{
 
     private static final ClassName CONTEXT = ClassName.get("android.content", "Context");
